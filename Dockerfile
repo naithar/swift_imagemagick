@@ -17,15 +17,16 @@ RUN curl -OL $IMAGE_MAGICK_URL && \
 	tar -xf $IMAGE_MAGICK_FOLDER.tar.xz && \
 	ls && \
 	cd $IMAGE_MAGICK_FOLDER && \
-	./configure --prefix=/usr/local \
+	./configure --enable-shared=yes --prefix=/usr/local \
 	 --disable-static --with-modules \
 	 --without-perl --without-magick-plus-plus \
-	 --with-quantum-depth=8 --disable-openmp \
+	 --with-quantum-depth=16 --disable-openmp \
 	 --with-gs-font-dir=/usr/local/share/ghostscript/fonts && \
 	make && \
 	make install && \
 	cd .. && \
-	rm -rf ImageMagick*
+	rm -rf ImageMagick* && \
+	ldconfig /usr/local/lib
 
 RUN convert --version
 
