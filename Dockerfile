@@ -1,7 +1,8 @@
 FROM swift:3.1.1
 MAINTAINER Sergey Minakov <naithar@icloud.com>
 
-ENV IMAGE_MAGICK_URL=https://www.imagemagick.org/download/releases/ImageMagick-6.9.6-8.tar.xz
+ENV IMAGE_MAGICK_URL=https://www.imagemagick.org/download/releases/ImageMagick-6.9.6-8.tar.xz \
+	IMAGE_MAGICK_FOLDER=ImageMagick-6.9.6-8
 
 RUN apt-get -y update && \
 	apt-get install -y --no-install-recommends apt-utils && \
@@ -12,9 +13,10 @@ RUN apt-get -y update && \
 	apt-get -y remove imagemagick && \
 	apt-get -y remove libmagickwand-dev
 
-RUN curl -L $IMAGE_MAGICK_URL -o imagemagick.tar.xz && \
-	tar xf imagemagick.tar.xz && \
-	cd imagemagick && \
+RUN curl -OL $IMAGE_MAGICK_URL && \
+	tar -xf $IMAGE_MAGICK_FOLDER.tar.xz && \
+	ls && \
+	cd $IMAGE_MAGICK_FOLDER && \
 	./configure --prefix=/usr/local \
 	 --disable-static --with-modules \
 	 --without-perl --without-magick-plus-plus \
@@ -23,7 +25,7 @@ RUN curl -L $IMAGE_MAGICK_URL -o imagemagick.tar.xz && \
 	make && \
 	make install && \
 	cd .. && \
-	rm -rf imagemagick*
+	rm -rf ImageMagick*
 
 RUN convert --version
 
