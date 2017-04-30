@@ -8,4 +8,5 @@ RUN apt-get -y update && \
 	apt-get -y install imagemagick-6.q16 && \
 	apt-get -y install imagemagick
 
-RUN convert -v
+RUN convert --version
+
