@@ -6,7 +6,9 @@ ENV IMAGE_MAGICK_URL=https://www.imagemagick.org/download/releases/ImageMagick-6
 RUN apt-get -y update && \
 	apt-get install -y --no-install-recommends apt-utils && \
 	apt-get -y install imagemagick-6.q16 && \
-	apt-get -y install imagemagick
+	apt-get -y install imagemagick && \
+	apt-get -y install libmagickwand-6.q16-dev && \
+	apt-get -y install libmagickwand-dev
 
 RUN convert --version
 
