@@ -12,7 +12,7 @@ RUN apt-get -y update && \
 	apt-get -y remove imagemagick && \
 	apt-get -y remove libmagickwand-dev
 
-RUN curl -OL $IMAGE_MAGICK_URL -o imagemagick.tar.xz && \
+RUN curl -L $IMAGE_MAGICK_URL -o imagemagick.tar.xz && \
 	tar xf imagemagick.tar.xz && \
 	cd imagemagick && \
 	./configure --prefix=/usr/local \
